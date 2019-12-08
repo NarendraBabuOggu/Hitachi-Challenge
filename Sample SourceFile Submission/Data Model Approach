@@ -1,0 +1,39 @@
+Data model Approach:
+	For the data model i used a simple approach in with the the data is stored in a star schema with 3 dimensions containing the station, country and datetime details in each and a fact containing the details of each train (like source, destination names, datetime, passenger deman(target)).
+as for the analysis for etl i used python only. I have created the separate dataframes for each dimension and fact which can then be loaded into tables of any kind of relational databases like oracle, sql server or mysql.
+for any new data, we can use scd-type1 or scd-type2 approaches for the dimensional data depending on the requirement. Below i am giving more details about the data model.
+
+Facts:
+	train_detail:
+		train_id	(unique id to represent the each row of the table)-(Primary Key)
+		id_code		(id_code given in the dataset for each row)
+		train_name	(Name of the train)
+		datetime	(Date and time at which the train was started)-(Foriegn key to Datetime_Detail Dimension)
+		Source 		(Source station)-(Foriegn key to Station_detail Dimension)
+		destination	(Destination Station)-(Foriegn key to Station_detail Dimension)
+		target		(The passenger demand for that train at that time either high, low or medium)
+
+Dimensions:
+	datetime_detail:
+		id			(unique id to represent the each row of the table)-(Primary Key)
+		datetime	(date and time)
+		day			(day for the datetime)
+		hours		(hour for the datetime)
+		minutes		(minutes for the datetime)
+		is_weekend	(whether the day is weekend or not)
+		
+	country_code:
+		id			(unique id to represent the each row of the table)-(Primary Key)
+		country_code(Country Code)
+		
+	station_detail:
+		id				(unique id to represent the each row of the table)-(Primary Key)
+		name			(Name of the station)
+		country_code	(Country code to which the station belongs)
+		mean_halt_times	(Mean of Halt times for the station)
+		latitude		(Latitude of the station)
+		Longitude		(Longitude of the station)
+
+
+		
+		
